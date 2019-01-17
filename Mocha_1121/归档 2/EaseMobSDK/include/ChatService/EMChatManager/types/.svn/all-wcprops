@@ -1,0 +1,191 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types
+END
+EMTextMessageBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMTextMessageBody.h
+END
+EMChatLocation.h
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMChatLocation.h
+END
+EMConversation.h
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMConversation.h
+END
+IEMChatCryptor.h
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/IEMChatCryptor.h
+END
+EMChatCommand.h
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMChatCommand.h
+END
+EMChatFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMChatFile.h
+END
+IEMChatFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/IEMChatFile.h
+END
+EMVideoMessageBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMVideoMessageBody.h
+END
+EMReceipt.h
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMReceipt.h
+END
+EMLocationMessageBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMLocationMessageBody.h
+END
+EMCommandMessageBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMCommandMessageBody.h
+END
+EMPushNotificationOptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMPushNotificationOptions.h
+END
+EMBuddy.h
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMBuddy.h
+END
+IEMChatProgressDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/IEMChatProgressDelegate.h
+END
+IEMMessageBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/IEMMessageBody.h
+END
+IEMFileMessageBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/IEMFileMessageBody.h
+END
+EMGroupStyleSetting.h
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMGroupStyleSetting.h
+END
+EMChatroom.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMChatroom.h
+END
+EMCursorResult.h
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMCursorResult.h
+END
+IEMChatObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/IEMChatObject.h
+END
+EMChatImage.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMChatImage.h
+END
+EMMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMMessage.h
+END
+EMChatText.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMChatText.h
+END
+IChatImageOptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/IChatImageOptions.h
+END
+EMReceiptBase.h
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMReceiptBase.h
+END
+EMVoiceMessageBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMVoiceMessageBody.h
+END
+EMGroup.h
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMGroup.h
+END
+EMFileMessageBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMFileMessageBody.h
+END
+EMChatVoice.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMChatVoice.h
+END
+EMImageMessageBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMImageMessageBody.h
+END
+EMChatVideo.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/types/EMChatVideo.h
+END

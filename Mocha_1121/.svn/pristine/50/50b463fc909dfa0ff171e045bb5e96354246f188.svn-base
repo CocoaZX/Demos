@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewActivityListViewController">
+            <connections>
+                <outlet property="activityListTableView" destination="pEO-XJ-yRn" id="fu8-Mq-neQ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="pEO-XJ-yRn">
+                    <rect key="frame" x="10" y="0.0" width="300" height="520"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <inset key="scrollIndicatorInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Rpq-uU-SMo"/>
+                        <outlet property="delegate" destination="-1" id="W7R-Ey-JNw"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="pEO-XJ-yRn" secondAttribute="trailing" constant="10" id="5mk-zU-yba"/>
+                <constraint firstAttribute="bottom" secondItem="pEO-XJ-yRn" secondAttribute="bottom" constant="48" id="T6i-gG-6Bt"/>
+                <constraint firstAttribute="bottom" secondItem="pEO-XJ-yRn" secondAttribute="bottom" id="hJt-TL-9hh"/>
+                <constraint firstItem="pEO-XJ-yRn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mcU-ra-C8U"/>
+                <constraint firstItem="pEO-XJ-yRn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="uVM-uT-fzT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="hJt-TL-9hh"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

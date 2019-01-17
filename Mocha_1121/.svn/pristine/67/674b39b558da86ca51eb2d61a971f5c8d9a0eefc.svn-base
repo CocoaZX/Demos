@@ -1,0 +1,22 @@
+//
+//  VideoAnimationView.h
+//  Mocha
+//
+//  Created by yfw－iMac on 16/3/23.
+//  Copyright © 2016年 renningning. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface VideoAnimationView : UIView
+
+
+- (void)initAnimationView;
+
+- (void)startAnimatino;
+
+- (void)stopAnimation;
+
+
+
+@end

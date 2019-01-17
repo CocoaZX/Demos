@@ -1,0 +1,15 @@
+//
+//  UIView+NextViewController.h
+//  Mocha
+//
+//  Created by zhoushuai on 16/3/22.
+//  Copyright © 2016年 renningning. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface UIView (NextViewController)
+
+- (UIViewController *)nextViewController;
+
+@end

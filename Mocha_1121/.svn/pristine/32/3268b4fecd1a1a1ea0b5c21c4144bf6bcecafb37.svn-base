@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="180" id="KGk-i7-Jjw" customClass="NewFeedbackCellTwoTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细描述：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rha-ay-b5K">
+                        <rect key="frame" x="20" y="4" width="280" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="8T5-yZ-OLY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MG3-do-g3j">
+                        <rect key="frame" x="20" y="33" width="286" height="120"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="说说看哪些功能反人类，小卡要去鞭打产品经理" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5L1-yQ-35z">
+                                <rect key="frame" x="5" y="5" width="270" height="110"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="oVW-4h-1IW"/>
+                                </constraints>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5L1-yQ-35z" firstAttribute="top" secondItem="MG3-do-g3j" secondAttribute="top" constant="5" id="GyP-Hc-2xM"/>
+                            <constraint firstAttribute="trailing" secondItem="5L1-yQ-35z" secondAttribute="trailing" constant="11" id="TJc-40-aav"/>
+                            <constraint firstAttribute="height" constant="120" id="ioK-gj-FFO"/>
+                            <constraint firstItem="5L1-yQ-35z" firstAttribute="leading" secondItem="MG3-do-g3j" secondAttribute="leading" constant="5" id="yoQ-9f-AOU"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="MG3-do-g3j" secondAttribute="trailing" constant="6" id="DPP-Vz-4jC"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Rha-ay-b5K" secondAttribute="trailing" constant="12" id="Fug-aW-asS"/>
+                    <constraint firstItem="Rha-ay-b5K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="Gfx-l8-gxZ"/>
+                    <constraint firstItem="MG3-do-g3j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="JsP-ZA-MUs"/>
+                    <constraint firstItem="Rha-ay-b5K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="tba-iL-rrG"/>
+                    <constraint firstItem="MG3-do-g3j" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="25" id="uXc-lf-86A"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="backView" destination="MG3-do-g3j" id="ie5-Vk-d2v"/>
+                <outlet property="textView" destination="5L1-yQ-35z" id="FWG-Qz-ElB"/>
+            </connections>
+            <point key="canvasLocation" x="509" y="442"/>
+        </tableViewCell>
+    </objects>
+</document>

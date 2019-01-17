@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/CallService/EMCallManager/types
+END
+EMCallSession.h
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/CallService/EMCallManager/types/EMCallSession.h
+END
+OpenGLView20.h
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/CallService/EMCallManager/types/OpenGLView20.h
+END
+IOpenGLView.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/CallService/EMCallManager/types/IOpenGLView.h
+END

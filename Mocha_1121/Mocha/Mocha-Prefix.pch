@@ -1,0 +1,87 @@
+//
+//  Mocha-Prefix.pch
+//  Mocha
+//
+//  Created by renningning on 14-11-19.
+//  Copyright (c) 2014年 renningning. All rights reserved.
+//
+
+#ifndef Mocha_Mocha_Prefix_pch
+#define Mocha_Mocha_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#import <Availability.h>
+
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7
+
+
+#define kScreenHeight                       [[UIScreen mainScreen] bounds].size.height
+#define kScreenWidth                        [[UIScreen mainScreen] bounds].size.width
+#define RGB(r, g, b)                        [UIColor colorWithRed : (r) / 255.f green : (g) / 255.f blue : (b) / 255.f alpha : 1.f]
+#define RGBA(r, g, b, a)                    [UIColor colorWithRed : r / 255.0 green : g / 255.0 blue : b / 255.0 alpha : a]
+
+#ifdef __OBJC__
+
+#import "ActivityDataModel.h"
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import <TCPlayerSDK/TCPlayerSDK.h>
+#import "MCJuBaoViewController.h"
+#import "UIImage+ColorToImage.h"
+#import "SQCStringUtils.h"
+#import "AppDelegate.h"
+#import "UIImageView+WebCache.h"
+#import "NewMyPageViewController.h"
+#import "LeafNotification.h"
+#import "MacroDefinition.h"
+#import "CommonUtils.h"
+#import "GlogalState.h"
+#import "UIColor+Hex.h"
+#import "AFNetwork.h"
+#import "SingleData.h"
+#import "MBProgressHUD.h"
+#import "CoreData+MagicalRecord.h"
+#import "PhotoInfo.h"
+#import "PersonInfo.h"
+#import "PhotoEngine.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+#import "SingleData.h"
+#import "WeixinMagnager.h"
+#import "QQManager.h"
+#import "WeiboSDK.h"
+#import "UmengCustomManager.h"
+#import "SinaManager.h"
+#import "EaseMob.h"
+#import "ChatManager.h"
+#import "EMChatYuePaiView.h"
+#import "MokaCardManager.h"
+#import "ThirdLoginManager.h"
+#import "SVProgressHUD.h"
+#import "SQCAlertViewManager.h"
+#import "UIViewExt.h"
+#import "AppDelegate+EaseMob.h"
+#import "AppDelegate+ThirdSDK.h"
+#import "AppDelegate+config.h"
+#import "AppDelegate+ThreeDTouch.h"
+#import "AppDelegate+Notification.h"
+#import "AppDelegate+Share.h"
+#import "SQCImageUtils.h"
+#import "MCMacroDefinition.h"
+
+
+
+
+#endif
+
+
+
+#endif

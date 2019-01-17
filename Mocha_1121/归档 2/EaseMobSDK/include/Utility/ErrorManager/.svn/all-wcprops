@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/Utility/ErrorManager
+END
+EMError.h
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/Utility/ErrorManager/EMError.h
+END
+EMErrorDefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/Utility/ErrorManager/EMErrorDefs.h
+END

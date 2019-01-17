@@ -1,0 +1,78 @@
+/* 
+  Localizable.strings
+
+  Created by liaogang on 15/1/28.
+  Copyright (c) 2015年 liaogang. All rights reserved.
+*/
+
+"OK" = "确定";
+
+"Cancel" = "取消";
+
+"Smine windows name"="Smine";
+
+"Pause" = "暂停";
+
+"Play" = "播放";
+
+"Paused" = "已暂停";
+
+"connect" = "连接";
+
+"disconnect" = "断开";
+
+"Abort" = "中止";
+
+"General" = "通用";
+
+"Account" = "账户";
+
+"HotKeys" = "热键";
+
+//play orders
+"default" = "默认";
+"random" = "随机";
+"repeat-single" = "重复-单个";
+"repeat-list" = "重复-列表";
+"shuffle" = "乱序";
+"single" = "单个";
+
+// column names
+"Index" = "序号";
+"Cover" = "封面";
+"Artist" = "艺术家";
+"Title" = "标题";
+"Album" = "专辑";
+"Genre" = "流派";
+"Year" = "年份";
+
+
+
+"Disconnect the session?" = "断开会话?";
+
+"The session connection needs login in on web browser." = "会话需要在浏览器里登录";
+
+"Smine is 'Waiting' for your authorization" = "Smine正在'等待'您的授权";
+
+"Switch to the web instanse just opened and login in to allow Smine for scrobbling songs" = "切换到刚打开的网页然后登录来允许Smine Scrobble歌曲";
+
+
+
+
+"Reload iTunes Media Source? " = "重新加载iTunes媒体源?";
+
+"This will remove all tracks in current playlist first." = "这将会移除当前列表的所有歌曲";
+
+"Love Succeed" = "喜爱成功";
+
+"Love Failed" = "喜爱失败";
+
+"File no found" = "文件未找到";
+
+
+"playlist: %@" = "播放列表: %@";
+
+"%d songs" = "%d 首歌曲";
+
+
+

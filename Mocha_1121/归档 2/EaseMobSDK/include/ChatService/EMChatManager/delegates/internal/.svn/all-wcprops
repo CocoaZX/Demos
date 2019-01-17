@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal
+END
+EMChatManagerPushNotificationDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerPushNotificationDelegate.h
+END
+EMChatManagerBuddyDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerBuddyDelegate.h
+END
+EMChatManagerLoginDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerLoginDelegate.h
+END
+EMChatManagerDelegateBase.h
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerDelegateBase.h
+END
+EMChatManagerEncryptionDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerEncryptionDelegate.h
+END
+EMChatManagerChatroomDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerChatroomDelegate.h
+END
+EMChatManagerGroupDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerGroupDelegate.h
+END
+EMChatManagerUtilDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerUtilDelegate.h
+END
+EMChatManagerChatDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerChatDelegate.h
+END
+EMChatManagerDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/delegates/internal/EMChatManagerDelegate.h
+END

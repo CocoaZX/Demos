@@ -1,0 +1,12 @@
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "4Ye-QE-v4b"; */
+"4Ye-QE-v4b.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "Scrobble your songs and now playing status to Last.fm"; ObjectID = "HD1-Ks-7Qs"; */
+"HD1-Ks-7Qs.title" = "抓取歌曲信息和播放状态至Last.fm";
+
+/* Class = "NSButtonCell"; title = "Stop scrobbling when screen saver running"; ObjectID = "lNm-oT-Hic"; */
+"lNm-oT-Hic.title" = "屏保开启时，停止抓取";
+
+/* Class = "NSButtonCell"; title = "Connect to your account"; ObjectID = "nHj-hg-UQI"; */
+"nHj-hg-UQI.title" = "连接到您的帐号";

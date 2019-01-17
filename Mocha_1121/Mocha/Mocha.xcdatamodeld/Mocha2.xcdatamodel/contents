@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F27" minimumToolsVersion="Automatic">
+    <entity name="ChatUserInfo" representedClassName="ChatUserInfo" syncable="YES">
+        <attribute name="chatId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="headPic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="PersonInfo" representedClassName="PersonInfo" syncable="YES">
+        <attribute name="birth" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bust" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createline" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fanscount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="followcount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="foot" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hair" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="head_pic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hipline" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isfollow" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="job" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastindex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastlogin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="leg" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="major" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mark" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messagecount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mobile" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mokacount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="payment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo_num" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trendscount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="waist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="workhistory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="workstyle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="worktags" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="PhotoInfo" representedClassName="PhotoInfo" syncable="YES">
+        <attribute name="commentscount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createline" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="favoritecount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isfavorite" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="islike" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="likecount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="width" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="likeUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonInfo" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="PersonInfo" positionX="-63" positionY="-18" width="128" height="568"/>
+        <element name="PhotoInfo" positionX="-54" positionY="144" width="128" height="343"/>
+        <element name="ChatUserInfo" positionX="-63" positionY="135" width="128" height="90"/>
+    </elements>
+</model>

@@ -1,0 +1,73 @@
+//
+//  CustomUIButton.m
+//  WeiMi
+//
+//  Created by lvjianxiong on 14-9-4.
+//
+//
+
+#import "CustomUIButton.h"
+
+@interface CustomUIButton ()
+
+@property (nonatomic, assign) CGFloat imageX;
+@property (nonatomic, assign) CGFloat titleY;
+
+@end
+
+@implementation CustomUIButton
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        //[self setImage:_IMAGE(@"my_edit_del") forState:UIControlStateNormal];
+    }
+    return self;
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
+
+
+- (CGRect )titleRectForContentRect:(CGRect)contentRect{
+    CGFloat width       = contentRect.size.width;
+    CGRect rect = CGRectMake(0, _titleY-2, width,  contentRect.size.height-_titleY);
+    return rect;
+}
+
+- (CGRect )imageRectForContentRect:(CGRect)contentRect{
+
+    UIImage *image =  [self imageForState:UIControlStateNormal];
+    CGFloat imageWidth  = image.size.width;
+    CGFloat imageHeight = image.size.height;
+    NSString *title = [self titleForState:UIControlStateNormal];
+    CGSize size = CGSizeZero;
+    
+    if (title) {
+        UIFont *font = kFont13;//self.titleLabel.font(cuo)
+        if (IsOSVersionAtLeastiOS7() >= 7.0) {
+            NSDictionary *attribute = @{NSFontAttributeName: font};
+            size = [title boundingRectWithSize:CGSizeMake(contentRect.size.width, contentRect.size.height) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+        }else{
+            size = [title sizeWithFont:font
+                     constrainedToSize:CGSizeMake(contentRect.size.width, contentRect.size.height)
+                         lineBreakMode:NSLineBreakByWordWrapping];
+        }
+        
+        _imageX = (contentRect.size.width-imageWidth)/2;
+    }
+    CGFloat h = (contentRect.size.height-imageHeight-size.height)/2-2;
+    CGRect rect = CGRectMake(_imageX, h, imageWidth, imageWidth);
+    _titleY = CGRectGetMaxY(rect);
+    return rect;
+}
+
+@end

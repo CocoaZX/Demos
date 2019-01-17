@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="McSiXinSettingViewController">
+            <connections>
+                <outlet property="closeDaShangSettingBtn" destination="jXH-uK-mcQ" id="bKh-L0-Jgf"/>
+                <outlet property="constrainForDescLabel_Height" destination="ldz-uP-J1T" id="RiX-4X-lkS"/>
+                <outlet property="descLabel" destination="Osp-3D-XxN" id="JBd-aM-Dr1"/>
+                <outlet property="view" destination="iN0-l3-epB" id="fPk-vM-gLy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ne5-b6-nPh">
+                    <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oicon031" translatesAutoresizingMaskIntoConstraints="NO" id="daV-8r-wHE">
+                            <rect key="frame" x="280" y="10" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="59d-jp-sqN"/>
+                                <constraint firstAttribute="height" constant="30" id="hCa-Vk-WJs"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置打赏金币" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1K-dI-LEa">
+                            <rect key="frame" x="20" y="10" width="120" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="I7c-so-F6R"/>
+                                <constraint firstAttribute="height" constant="30" id="OkT-mZ-gEn"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXH-uK-mcQ">
+                            <rect key="frame" x="20" y="10" width="260" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="6vF-4Y-Vzi"/>
+                            </constraints>
+                            <state key="normal" title="关闭">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="closeDashangSettingBtnClick:" destination="-1" eventType="touchUpInside" id="rIt-Aa-254"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="FN9-bd-xmj"/>
+                        <constraint firstAttribute="trailing" secondItem="daV-8r-wHE" secondAttribute="trailing" constant="10" id="GBr-1s-RDh"/>
+                        <constraint firstItem="jXH-uK-mcQ" firstAttribute="top" secondItem="ne5-b6-nPh" secondAttribute="top" constant="10" id="NIr-lk-80S"/>
+                        <constraint firstItem="daV-8r-wHE" firstAttribute="leading" secondItem="jXH-uK-mcQ" secondAttribute="trailing" id="RA3-km-Ujt"/>
+                        <constraint firstItem="daV-8r-wHE" firstAttribute="top" secondItem="ne5-b6-nPh" secondAttribute="top" constant="10" id="Sbx-IE-Xwz"/>
+                        <constraint firstItem="e1K-dI-LEa" firstAttribute="leading" secondItem="ne5-b6-nPh" secondAttribute="leading" constant="20" id="TRX-8s-Mbe"/>
+                        <constraint firstItem="e1K-dI-LEa" firstAttribute="top" secondItem="ne5-b6-nPh" secondAttribute="top" constant="10" id="kf4-z1-yQP"/>
+                        <constraint firstItem="jXH-uK-mcQ" firstAttribute="leading" secondItem="ne5-b6-nPh" secondAttribute="leading" constant="20" id="nM3-vi-WwX"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Osp-3D-XxN">
+                    <rect key="frame" x="20" y="90" width="280" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="ldz-uP-J1T"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Osp-3D-XxN" firstAttribute="top" secondItem="ne5-b6-nPh" secondAttribute="bottom" constant="20" id="IH6-nX-pcR"/>
+                <constraint firstItem="ne5-b6-nPh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LwK-r2-HxM"/>
+                <constraint firstAttribute="trailing" secondItem="ne5-b6-nPh" secondAttribute="trailing" id="T6u-bA-Xle"/>
+                <constraint firstItem="Osp-3D-XxN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="ZyC-VH-AvX"/>
+                <constraint firstAttribute="trailing" secondItem="Osp-3D-XxN" secondAttribute="trailing" constant="20" id="f0H-TC-OCH"/>
+                <constraint firstItem="ne5-b6-nPh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="m3u-jy-xxW"/>
+            </constraints>
+            <point key="canvasLocation" x="257" y="183"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="oicon031" width="18" height="18"/>
+    </resources>
+</document>

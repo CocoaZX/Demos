@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager
+END
+EMGroupManagerDefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/EMGroupManagerDefs.h
+END
+EMChatManagerDefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/EMChatManagerDefs.h
+END
+EMPushManagerDefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/EMPushManagerDefs.h
+END
+IChatManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/ChatService/EMChatManager/IChatManager.h
+END

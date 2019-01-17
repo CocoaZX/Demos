@@ -1,0 +1,925 @@
+//
+//  VideoMaskView.m
+//  Mocha
+//
+//  Created by yfw－iMac on 16/2/25.
+//  Copyright © 2016年 renningning. All rights reserved.
+//
+
+#import "VideoMaskView.h"
+#import "ALMoviePlayerController.h"
+#import "ALAirplayView.h"
+
+#import "ALButton.h"
+#import <tgmath.h>
+#import <QuartzCore/QuartzCore.h>
+#import "DaShangGoodsView.h"
+#import "NewLoginViewController.h"
+#import "DaShangGoodsView.h"
+
+@implementation UIDevice (ALSystemVersion)
+
++ (float)iOSVersion {
+    static float version = 0.f;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    });
+    return version;
+}
+
+@end
+@interface ALMoviePlayerControlsBar_sqc : UIView
+
+@property (nonatomic, strong) UIColor *color;
+
+@end
+@interface VideoMaskView ()<UIActionSheetDelegate>
+{
+    
+    
+}
+@property (nonatomic, strong) ALMoviePlayerControlsBar_sqc *topBar;
+@property (nonatomic, strong) ALMoviePlayerControlsBar_sqc *bottomBar;
+@property (nonatomic, strong) UISlider *durationSlider;
+@property (nonatomic, strong) UILabel *timeElapsedLabel;
+@property (nonatomic, strong) UILabel *timeRemainingLabel;
+@property (nonatomic, strong) MPVolumeView *volumeView;
+@property (nonatomic, strong) ALButton *fullscreenButton;
+@property (nonatomic, strong) ALButton *seekForwardButton;
+@property (nonatomic, strong) ALButton *seekBackwardButton;
+@property (nonatomic, strong) ALButton *scaleButton;
+@property (nonatomic, strong) ALButton *playPauseButton;
+@property (nonatomic, strong) ALAirplayView *airplayView;
+@property (nonatomic, strong) UIView *activityBackgroundView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) NSTimer *durationTimer;
+@property (nonatomic, strong) UIActionSheet *moreSheet;
+@property (nonatomic, retain) UIButton *playVideoButton;
+
+
+@property (nonatomic, strong) UIView *replayView;
+@property (nonatomic ,strong) DaShangGoodsView *dashang;
+@property (nonatomic,strong ) UILabel *plusLabel;
+@property (nonatomic,strong)  UIImageView *goodsImage;
+
+@end
+
+
+@implementation VideoMaskView
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    LOG_METHOD;
+    
+}
+
+- (void)setVideoButtonHidden
+{
+    self.playVideoButton.hidden = YES;
+    self.timeElapsedLabel.text = @"0:00";
+    self.timeRemainingLabel.text = @"0:00";
+    self.isBackToShow = NO;
+}
+
+- (void)initReplayView
+{
+    float buttonWidth = 100;
+    float buttonHeight = 50;
+    float buttonX = kScreenWidth/2-buttonWidth/2;
+    float buttonY = kScreenHeight/2-buttonHeight;
+
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    backView.backgroundColor = [UIColor clearColor];
+
+    UIView *alphaView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    alphaView.backgroundColor = [UIColor blackColor];
+    alphaView.alpha = 0.5;
+    
+    [backView addSubview:alphaView];
+    
+    UIButton *replayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [replayButton setTitle:@"重播" forState:UIControlStateNormal];
+    [replayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [replayButton addTarget:self action:@selector(replayMethod:) forControlEvents:UIControlEventTouchUpInside];
+    [replayButton setFrame:CGRectMake(buttonX, buttonY, buttonWidth, buttonHeight)];
+    [backView addSubview:replayButton];
+    
+    UIButton *shangButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shangButton setTitle:@"打赏" forState:UIControlStateNormal];
+    [shangButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [shangButton addTarget:self action:@selector(shangMethod:) forControlEvents:UIControlEventTouchUpInside];
+    [shangButton setFrame:CGRectMake(buttonX, buttonY+buttonHeight, buttonWidth, buttonHeight)];
+    
+    if (_isAllowedShang) {
+        [backView addSubview:shangButton];
+    }
+    
+    
+    UITapGestureRecognizer *tapgesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disappearAndAppear)];
+    tapgesture.numberOfTapsRequired = 1;
+    [backView addGestureRecognizer:tapgesture];
+    
+    self.replayView = backView;
+}
+
+- (void)replayMethod:(UIButton *)sender
+{
+    self.replayView.hidden = YES;
+    
+    [self playPausePressed:sender];
+}
+
+- (void)shangMethod:(UIButton *)sender
+{
+    self.replayView.hidden = YES;
+
+    [self jumpToShangView];
+    
+}
+
+- (void)initViews
+{
+    [self addNotifications];
+    [self initReplayView];
+    
+//    _barColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    _barColor = [UIColor clearColor];
+
+    _barHeight = [UIDevice iOSVersion] >= 7.0 ? 70.f : 50.f;
+
+    if (!self.playVideoButton) {
+        self.playVideoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+    }
+    [self.playVideoButton addTarget:self action:@selector(playPausePressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.playVideoButton setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    [self.playVideoButton setImage:[UIImage imageNamed:@"playButton"] forState:UIControlStateNormal];
+    
+    self.playVideoButton.hidden = YES;
+    [self addSubview:self.playVideoButton];
+    [self bringSubviewToFront:self.playVideoButton];
+    //top bar
+    _topBar = [[ALMoviePlayerControlsBar_sqc alloc] init];
+    _topBar.color = _barColor;
+    _topBar.alpha = 1.f;
+    [self addSubview:_topBar];
+    
+    //bottom bar
+    _bottomBar = [[ALMoviePlayerControlsBar_sqc alloc] init];
+    _bottomBar.color = _barColor;
+    _bottomBar.alpha = 1.f;
+    [self addSubview:_bottomBar];
+    
+    _durationSlider = [[UISlider alloc] init];
+    _durationSlider.value = 0.f;
+    _durationSlider.continuous = YES;
+    [_durationSlider setThumbImage:[UIImage imageNamed:@"playYuanDian"] forState:UIControlStateNormal];
+    [_durationSlider addTarget:self action:@selector(durationSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [_durationSlider addTarget:self action:@selector(durationSliderTouchBegan:) forControlEvents:UIControlEventTouchDown];
+    [_durationSlider addTarget:self action:@selector(durationSliderTouchEnded:) forControlEvents:UIControlEventTouchUpInside];
+    [_durationSlider addTarget:self action:@selector(durationSliderTouchEnded:) forControlEvents:UIControlEventTouchUpOutside];
+    
+    _timeElapsedLabel = [[UILabel alloc] init];
+    _timeElapsedLabel.backgroundColor = [UIColor clearColor];
+    _timeElapsedLabel.font = [UIFont systemFontOfSize:12.f];
+    _timeElapsedLabel.textColor = [UIColor lightTextColor];
+    _timeElapsedLabel.textAlignment = NSTextAlignmentRight;
+    _timeElapsedLabel.text = @"0:00";
+    _timeElapsedLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    _timeElapsedLabel.layer.shadowRadius = 1.f;
+    _timeElapsedLabel.layer.shadowOffset = CGSizeMake(1.f, 1.f);
+    _timeElapsedLabel.layer.shadowOpacity = 0.8f;
+    
+    _timeRemainingLabel = [[UILabel alloc] init];
+    _timeRemainingLabel.backgroundColor = [UIColor clearColor];
+    _timeRemainingLabel.font = [UIFont systemFontOfSize:12.f];
+    _timeRemainingLabel.textColor = [UIColor lightTextColor];
+    _timeRemainingLabel.textAlignment = NSTextAlignmentLeft;
+    _timeRemainingLabel.text = @"0:00";
+    _timeRemainingLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    _timeRemainingLabel.layer.shadowRadius = 1.f;
+    _timeRemainingLabel.layer.shadowOffset = CGSizeMake(1.f, 1.f);
+    _timeRemainingLabel.layer.shadowOpacity = 0.8f;
+    
+    [_bottomBar addSubview:_durationSlider];
+    [_bottomBar addSubview:_timeElapsedLabel];
+    [_bottomBar addSubview:_timeRemainingLabel];
+    
+    _fullscreenButton = [[ALButton alloc] init];
+    [_fullscreenButton setImage:[UIImage imageNamed:@"playerClose"] forState:UIControlStateNormal];
+    [_fullscreenButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _fullscreenButton.titleLabel.shadowOffset = CGSizeMake(1.f, 1.f);
+    [_fullscreenButton.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
+    _fullscreenButton.delegate = self;
+    [_fullscreenButton addTarget:self action:@selector(fullscreenPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_topBar addSubview:_fullscreenButton];
+    
+    _scaleButton = [[ALButton alloc] init];
+    _scaleButton.delegate = self;
+    [_scaleButton setImage:[UIImage imageNamed:@"playerMore"] forState:UIControlStateNormal];
+    [_scaleButton addTarget:self action:@selector(moremethod:) forControlEvents:UIControlEventTouchUpInside];
+    [_topBar addSubview:_scaleButton];
+    
+    _playPauseButton = [[ALButton alloc] init];
+    [_playPauseButton setImage:[UIImage imageNamed:@"playerPause"] forState:UIControlStateNormal];
+    [_playPauseButton setImage:[UIImage imageNamed:@"playerPlay"] forState:UIControlStateSelected];
+    //    [_playPauseButton setSelected:_moviePlayer.playbackState == MPMoviePlaybackStatePlaying ? NO : YES];
+    [_playPauseButton addTarget:self action:@selector(playPausePressed:) forControlEvents:UIControlEventTouchUpInside];
+    _playPauseButton.delegate = self;
+    [_bottomBar addSubview:_playPauseButton];
+
+    _activityBackgroundView = [[UIView alloc] init];
+    [_activityBackgroundView setBackgroundColor:[UIColor blackColor]];
+    _activityBackgroundView.alpha = 0.f;
+    
+//    _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    _activityIndicator.alpha = 0.f;
+//    _activityIndicator.hidesWhenStopped = YES;
+    
+    
+    
+    CGFloat paddingFromBezel = self.frame.size.width <= kScreenWidth ? 10.f : 20.f;
+    CGFloat paddingBetweenButtons = self.frame.size.width <= kScreenWidth ? 10.f : 30.f;
+    CGFloat paddingBetweenPlaybackButtons = self.frame.size.width <= kScreenWidth ? 20.f : 30.f;
+    CGFloat paddingBetweenLabelsAndSlider = 10.f;
+    CGFloat sliderHeight = 34.f; //default height
+    CGFloat volumeHeight = 20.f;
+    CGFloat volumeWidth = isIpad() ? 210.f : 120.f;
+    CGFloat seekWidth = 36.f;
+    CGFloat seekHeight = 20.f;
+    CGFloat airplayWidth = 30.f;
+    CGFloat airplayHeight = 22.f;
+    CGFloat playWidth = 18.f;
+    CGFloat playHeight = 22.f;
+    CGFloat labelWidth = 30.f;
+    
+    CGFloat fullscreenWidth = 34.f;
+    CGFloat fullscreenHeight = self.barHeight;
+    CGFloat scaleWidth = 28.f;
+    CGFloat scaleHeight = 28.f;
+    self.topBar.frame = CGRectMake(0, 0, self.frame.size.width, self.barHeight);
+    self.fullscreenButton.frame = CGRectMake(paddingFromBezel, self.barHeight/2 - fullscreenHeight/2, fullscreenWidth, fullscreenHeight);
+    self.timeElapsedLabel.frame = CGRectMake(self.fullscreenButton.frame.origin.x + self.fullscreenButton.frame.size.width + paddingBetweenButtons-20, 0, labelWidth, self.barHeight);
+    self.scaleButton.frame = CGRectMake(self.topBar.frame.size.width - paddingFromBezel - scaleWidth, self.barHeight/2 - scaleHeight/2, scaleWidth, scaleHeight);
+    self.timeRemainingLabel.frame = CGRectMake(self.scaleButton.frame.origin.x - paddingBetweenButtons - labelWidth+40, 0, labelWidth, self.barHeight);
+    
+    //bottom bar
+    self.bottomBar.frame = CGRectMake(0, self.frame.size.height - self.barHeight, self.frame.size.width, self.barHeight);
+    self.playPauseButton.frame = CGRectMake(10, self.barHeight/2 - playHeight/2, playWidth, playHeight);
+    self.seekForwardButton.frame = CGRectMake(self.playPauseButton.frame.origin.x + self.playPauseButton.frame.size.width + paddingBetweenPlaybackButtons, self.barHeight/2 - seekHeight/2 + 1.f, seekWidth, seekHeight);
+    self.seekBackwardButton.frame = CGRectMake(self.playPauseButton.frame.origin.x - paddingBetweenPlaybackButtons - seekWidth, self.barHeight/2 - seekHeight/2 + 1.f, seekWidth, seekHeight);
+    
+    //hide volume view in iPhone's portrait orientation
+    self.volumeView.alpha = 1.f;
+    self.volumeView.frame = CGRectMake(paddingFromBezel, self.barHeight/2 - volumeHeight/2, volumeWidth, volumeHeight);
+    
+    self.airplayView.frame = CGRectMake(self.bottomBar.frame.size.width - paddingFromBezel - airplayWidth, self.barHeight/2 - airplayHeight/2, airplayWidth, airplayHeight);
+    //duration slider
+    CGFloat timeRemainingX = self.timeRemainingLabel.frame.origin.x;
+    CGFloat timeElapsedX = self.timeElapsedLabel.frame.origin.x;
+    CGFloat sliderWidth = ((timeRemainingX - paddingBetweenLabelsAndSlider) - (timeElapsedX + self.timeElapsedLabel.frame.size.width + paddingBetweenLabelsAndSlider));
+    self.durationSlider.frame = CGRectMake(timeElapsedX + self.timeElapsedLabel.frame.size.width + paddingBetweenLabelsAndSlider, self.barHeight/2 - sliderHeight/2, sliderWidth, sliderHeight);
+    
+    UITapGestureRecognizer *tapgesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disappearAndAppear)];
+    tapgesture.numberOfTapsRequired = 1;
+    [self addGestureRecognizer:tapgesture];
+    
+    
+}
+
+- (void)disappearAndAppear
+{
+    LOG_METHOD;
+    /*
+    if (self.bottomBar.hidden) {
+        self.bottomBar.hidden = NO;
+        self.topBar.hidden = NO;
+
+        [UIView animateWithDuration:1 animations:^{
+            self.bottomBar.alpha = 1.0;
+            self.topBar.alpha = 1.0;
+
+        } completion:^(BOOL finished) {
+        }];
+    }else
+    {
+        [UIView animateWithDuration:1 animations:^{
+            self.bottomBar.alpha = 0.0;
+            self.topBar.alpha = 0.0;
+
+        } completion:^(BOOL finished) {
+            self.bottomBar.hidden = YES;
+            self.topBar.hidden = YES;
+
+        }];
+    }
+     */
+    
+    self.supView.timeLabel.hidden = YES;
+
+    if (!_isAllowedShang) {
+        float volume = [MPMusicPlayerController applicationMusicPlayer].volume;
+        if (volume == 0) {
+            [self volumeWith:0.6];
+            self.moviePlayer.repeatMode = MPMovieRepeatModeNone;
+        }else{
+            [self volumeWith:0];
+            self.moviePlayer.repeatMode = MPMovieRepeatModeOne;
+        }
+    }
+    
+    if (!self.replayView.hidden) {
+        
+        [self fullscreenPressed:nil];
+        return;
+    }
+    
+    if (self.bottomBar.hidden) {
+        self.maskImageView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight) ;
+        self.loadingView.center = self.maskImageView.center;
+//        [self.moviePlayer.view setFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+
+        self.isBackToShow = NO;
+        self.bottomBar.hidden = NO;
+        self.topBar.hidden = NO;
+        
+        [UIView animateWithDuration:0.2 animations:^{
+
+            [self.moviePlayer.view setFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+            NSEnumerator *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
+            for (UIWindow *window in frontToBackWindows){
+                BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
+                BOOL windowIsVisible = !window.hidden && window.alpha > 0;
+                BOOL windowLevelNormal = window.windowLevel == UIWindowLevelNormal;
+                
+                if (windowOnMainScreen && windowIsVisible && windowLevelNormal) {
+                    [window addSubview:self.moviePlayer.view];
+                    
+                    break;
+                }
+            }
+        } completion:^(BOOL finished) {
+            [self.moviePlayer play];
+            [self.playPauseButton setSelected:NO];
+            [self.playVideoButton setHidden:YES];
+        }];
+    }else
+    {
+        
+        
+        [self fullscreenPressed:nil];
+
+    }
+    
+    
+}
+
+static const CGFloat activityIndicatorSize = 40.f;
+static const inline BOOL isIpad() {
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+}
+
+-(void)volumeWith:(float)vol{
+    
+    //    进入默认静音
+    __block UISlider *volumeViewSlider = nil;
+    
+    __block MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:CGRectMake(-150, -150, 100, 100)];
+    volumeView.hidden = NO;
+    [self addSubview:volumeView];
+    
+    for (UIView *view in [volumeView subviews]){
+        if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+            volumeViewSlider = (UISlider*)view;
+            break;
+        }
+    }
+    
+    if (vol == 0) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [[MPMusicPlayerController applicationMusicPlayer] setVolume:vol];
+            
+        });
+    }else{
+        [[MPMusicPlayerController applicationMusicPlayer] setVolume:vol];
+    }
+    
+}
+
+- (void)fullscreenPressed:(UIButton *)button {
+    
+//    [self.moviePlayer stop];
+//    [self.moviePlayer.view removeFromSuperview];
+//    [self removeFromSuperview];
+    //设置音量的方法
+
+    [self volumeWith:0.0];
+    self.isBackToShow = YES;
+    if (self.moviePlayer.playbackState==MPMoviePlaybackStatePlaying) {
+
+    }else
+    {
+        [self.supView resetPlayButton];
+    }
+    self.bottomBar.hidden = YES;
+    self.topBar.hidden = YES;
+    [UIView animateWithDuration:0.2 animations:^{
+    
+        if (_isAllowedShang) {
+            [self.supView addSubview:self.moviePlayer.view];
+        }else{
+            [self.supAuctionView addSubview:self.moviePlayer.view];
+        }
+        
+        
+        NSLog(@"x=%f,y=%f,w=%f,h=%f",self.originalFrame.origin.x,self.originalFrame.origin.y,self.originalFrame.size.width,self.originalFrame.size.height);
+
+        self.maskImageView.frame = CGRectMake(0, 0, self.originalFrame.size.width, self.originalFrame.size.height) ;
+        self.loadingView.center = self.maskImageView.center;
+        self.moviePlayer.view.clipsToBounds = YES;
+        [self.moviePlayer.view setFrame:self.originalFrame];
+        
+    } completion:^(BOOL finished) {
+        
+        if (self.moviePlayer.playbackState==MPMoviePlaybackStatePlaying) {
+            self.supView.timeLabel.hidden = NO;
+
+        }else
+        {
+            [self.supView resetRePlayButton];
+        }
+    }];
+    
+    self.replayView.hidden = YES;
+//    [self.moviePlayer play];
+    
+    if (_isAllowedShang) {
+        
+    }else{
+        self.moviePlayer.repeatMode = MPMovieRepeatModeOne;
+    }
+    
+
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
+}
+
+- (void)playPausePressed:(UIButton *)button {
+    self.moviePlayer.playbackState == MPMoviePlaybackStatePlaying ? [self.playVideoButton setHidden:NO] : [self.playVideoButton setHidden:YES];
+    [self bringSubviewToFront:self.playVideoButton];
+
+    self.moviePlayer.playbackState == MPMoviePlaybackStatePlaying ? [self.playPauseButton setSelected:YES] : [self.playPauseButton setSelected:NO];
+
+    self.moviePlayer.playbackState == MPMoviePlaybackStatePlaying ? [self.moviePlayer pause] : [self.moviePlayer play];
+}
+
+- (void)durationSliderTouchBegan:(UISlider *)slider {
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideControls:) object:nil];
+    [self.moviePlayer pause];
+}
+
+- (void)durationSliderTouchEnded:(UISlider *)slider {
+    [self.moviePlayer setCurrentPlaybackTime:floor(slider.value)];
+    [self.moviePlayer play];
+//    [self performSelector:@selector(hideControls:) withObject:nil afterDelay:self.fadeDelay];
+}
+
+- (void)durationSliderValueChanged:(UISlider *)slider {
+    double currentTime = floor(slider.value);
+    double totalTime = floor(self.moviePlayer.duration);
+//    [self setTimeLabelValues:currentTime totalTime:totalTime];
+}
+
+- (void)setDurationSliderMaxMinValues {
+    CGFloat duration = self.moviePlayer.duration;
+    self.durationSlider.minimumValue = 0.f;
+    self.durationSlider.maximumValue = duration;
+}
+
+- (void)monitorMoviePlayback {
+    double currentTime = floor(self.moviePlayer.currentPlaybackTime+1.0);
+    double totalTime = floor(self.moviePlayer.duration);
+    [self setTimeLabelValues:currentTime totalTime:totalTime];
+    self.durationSlider.value = ceil(currentTime);
+}
+
+- (void)setTimeLabelValues:(double)currentTime totalTime:(double)totalTime {
+    double minutesElapsed = floor(currentTime / 60.0);
+    double secondsElapsed = fmod(currentTime-1.0, 60.0);
+    self.timeElapsedLabel.text = [NSString stringWithFormat:@"%.0f:%02.0f", minutesElapsed, secondsElapsed];
+    double minutesRemaining;
+    double secondsRemaining;
+    if (self.timeRemainingDecrements) {
+        minutesRemaining = floor((totalTime - currentTime) / 60.0);
+        secondsRemaining = fmod((totalTime - currentTime), 60.0);
+    } else {
+        minutesRemaining = floor(totalTime / 60.0);
+        secondsRemaining = floor(fmod(totalTime, 60.0));
+    }
+    self.timeRemainingLabel.text = self.timeRemainingDecrements ? [NSString stringWithFormat:@"-%.0f:%02.0f", minutesRemaining, secondsRemaining] : [NSString stringWithFormat:@"%.0f:%02.0f", minutesRemaining, secondsRemaining];
+    
+    self.supView.timeLabel.text = [NSString stringWithFormat:@"%@ / %@", self.timeElapsedLabel.text, self.timeRemainingLabel.text];
+
+}
+
+- (void)startDurationTimer {
+    self.durationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(monitorMoviePlayback) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.durationTimer forMode:NSDefaultRunLoopMode];
+}
+
+- (void)stopDurationTimer {
+    [self.durationTimer invalidate];
+}
+
+
+-(void)jumpToShangView{
+    NSString *uid = [[USER_DEFAULT valueForKey:MOKA_USER_VALUE] valueForKey:@"id"];
+    //未登录直接跳转登陆
+    if (!uid) {
+        UserDefaultSetBool(YES, @"isHiddenTabbar");
+        [USER_DEFAULT setObject:nil forKey:MOKA_USER_VALUE];
+        [USER_DEFAULT synchronize];
+        
+        NewLoginViewController *loginVC = [[NewLoginViewController alloc]initWithNibName:[NSString stringWithFormat:@"NewLoginViewController"] bundle:nil];
+//        [self pushViewController:loginVC animated:YES];
+        
+        return;
+    }
+    
+    //红包打赏更换为礼品打赏
+    NSDictionary *feedDict = self.infoDict;
+    NSLog(@"%@",feedDict);
+    NSString *photoId = [NSString stringWithFormat:@"%@",self.infoDict[@"id"]];
+    NSString *dashangType = [NSString stringWithFormat:@"%@",self.infoDict[@"feedType"]];
+    NSString *targetUid = [NSString stringWithFormat:@"%@",self.infoDict[@"uid"]];
+    
+    
+    self.dashang = [[DaShangGoodsView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    self.dashang.superController = self.superController;
+    self.dashang.currentPhotoId = photoId;
+    self.dashang.animationType = @"dashangWithNoAnimation";
+    self.dashang.dashangType = dashangType;
+    self.dashang.targetUid = targetUid;
+    
+    
+    [self.dashang setUpviews];
+    [self.dashang addToWindow];
+//    [self addSubview:self.dashang];
+    
+}
+
+#pragma mark 通知执行动画
+
+
+//首页附近功能送礼物动画
+-(void)animationWithText:(NSNotification *)text{
+    
+    //动画期间界面禁用
+    self.userInteractionEnabled = NO;
+    _plusLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-45, 50, 40, 25)];
+    _plusLabel.center = CGPointMake(self.frame.size.width-30, self.frame.size.height - 40);
+    _plusLabel.text = @"+1";
+    _plusLabel.textColor = [CommonUtils colorFromHexString:kLikeRedColor];
+    _plusLabel.alpha = 0;
+    
+    [self addSubview:_plusLabel];
+    
+    //1.取到选择礼物显示到view上
+    NSString *dataStr = text.userInfo[@"imgData"];
+    NSData *data = [[NSData alloc]initWithContentsOfFile:dataStr];
+    UIImage *image = [[UIImage alloc]initWithData:data];
+    _goodsImage = [[UIImageView alloc]initWithImage:image];
+    
+    [_goodsImage sizeToFit];
+    _goodsImage.center = CGPointMake(kDeviceWidth*0.5, kDeviceHeight*0.5);
+    
+    [self addSubview:_goodsImage];
+    //购物车动画
+    
+    self.goodsImage.hidden = NO;
+    
+    //2.抛物线动画
+    CAAnimationGroup *group = [[CAAnimationGroup alloc]init];
+    
+    CAKeyframeAnimation *goodsAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    CGMutablePathRef thePath = CGPathCreateMutable();
+    
+    CGPoint startP = CGPointMake(kDeviceWidth*0.5, kDeviceHeight*0.5);
+    CGPoint endP = CGPointMake(self.frame.size.width-25, self.frame.size.height - 40);;
+    
+    
+    CGPathMoveToPoint(thePath, NULL, startP.x, startP.y);
+    CGPathAddQuadCurveToPoint(thePath, NULL, 200, 200, endP.x, endP.y);
+    
+    goodsAnimation.path = thePath;
+    
+    //图片缩放动画
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:0.1];
+    scaleAnimation.autoreverses = NO;
+    
+    group.animations = @[scaleAnimation,goodsAnimation];
+    group.duration = 1;
+    group.fillMode = kCAFillModeForwards;
+    group.removedOnCompletion = NO;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [_goodsImage.layer addAnimation:group forKey:nil];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            
+            //礼物加1动画效果
+            self.plusLabel.alpha = 1;
+            
+            
+            [UIView animateWithDuration:1 animations:^{
+                _plusLabel.alpha = 0;
+                _goodsImage.alpha = 0;
+                _plusLabel.center = CGPointMake(self.plusLabel.center.x, self.plusLabel.center.y - 25);
+                
+            }];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                
+                    
+
+                [_plusLabel removeFromSuperview];
+                [_goodsImage removeFromSuperview];
+                
+                
+                
+                self.userInteractionEnabled = YES;
+            });
+            
+        });
+        
+    });
+    
+}
+
+- (void)addNotifications {
+    
+    //动画调用通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animationWithText:) name:@"fullScreenVideoAnim" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackStateDidChange:) name:MPMoviePlayerPlaybackStateDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieContentURLDidChange:) name:ALMoviePlayerContentURLDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieDurationAvailable:) name:MPMovieDurationAvailableNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieLoadStateDidChange:) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeStates_new) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeStatesExist_new) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeStatesDone_new) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];  
+}
+
+- (void)didChangeStates_new
+{
+    
+    NSLog(@"didChangeStates_new ");
+    
+    
+}
+
+- (void)didChangeStatesExist_new
+{
+    NSLog(@"didChangeStatesExist_new ");
+    
+    
+}
+
+- (void)didChangeStatesDone_new
+{
+    NSLog(@"didChangeStatesDone_new ");
+    self.durationSlider.value = self.moviePlayer.duration;
+    [self performSelector:@selector(playBackToStart) withObject:nil afterDelay:0.2];
+    [self.playPauseButton setSelected:YES];
+    
+    if(!self.isBackToShow)
+    {
+        [self addSubview:self.replayView];
+        self.replayView.hidden = NO;
+        [self bringSubviewToFront:self.replayView];
+    }
+    
+
+//    [self.playVideoButton setHidden:NO];
+//    [self bringSubviewToFront:self.playVideoButton];
+    self.timeElapsedLabel.text = @"0:00";
+    [self.supView resetRePlayButton];
+}
+
+- (void)playBackToStart
+{
+    self.durationSlider.value = 0;
+
+    
+}
+
+- (void)moviePlaybackStateDidChange:(NSNotification *)note {
+    switch (self.moviePlayer.playbackState) {
+        case MPMoviePlaybackStatePlaying:
+            self.replayView.hidden = YES;
+
+            self.playPauseButton.selected = NO;
+            [self startDurationTimer];
+        case MPMoviePlaybackStateSeekingBackward:
+        case MPMoviePlaybackStateSeekingForward:
+
+            break;
+        case MPMoviePlaybackStateInterrupted:
+
+            break;
+        case MPMoviePlaybackStatePaused:
+        case MPMoviePlaybackStateStopped:
+
+            self.playPauseButton.selected = YES;
+            [self stopDurationTimer];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)movieDurationAvailable:(NSNotification *)note {
+    [self setDurationSliderMaxMinValues];
+}
+
+- (void)moremethod:(id)sender
+{
+    if (!self.isCurrentUser) {
+        self.moreSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                     delegate:self
+                                            cancelButtonTitle:@"取消"
+                                       destructiveButtonTitle:nil
+                                            otherButtonTitles:@"微信朋友圈",@"微信好友",@"QQ", @"举报", nil];
+    }else
+    {
+        self.moreSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                     delegate:self
+                                            cancelButtonTitle:@"取消"
+                                       destructiveButtonTitle:nil
+                                            otherButtonTitles:@"微信朋友圈",@"微信好友",@"QQ", @"删除", nil];
+    }
+    
+    [self.moreSheet showInView:self];
+}
+
+#pragma mark - uiactionsheet
+//分享
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+        {
+            [(AppDelegate *)[UIApplication sharedApplication].delegate changeScene:WXSceneTimeline];
+
+            NSString *url = self.videoURL;
+            //            NSString *url = @"http://www.huxiu.com/article/140126/1.html?f=index_feed_article";
+            
+            //            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+            NSData *imageData = nil;
+            
+            if (!imageData) {
+                imageData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon-72" ofType:@"png"]];
+            }
+            NSString *webUrl = [USER_DEFAULT objectForKey:@"webUrl"];
+            
+            NSString *videoShareUrl = [NSString stringWithFormat:@"%@/v/%@",webUrl,self.vid];
+
+            UIImage *image = [UIImage imageWithData:imageData];
+            [(AppDelegate *)[UIApplication sharedApplication].delegate sendLinkContentTitle_video:@"视频分享" desc:@"视频分享" header:image URL:videoShareUrl uid:@"视频分享"];
+        }
+            break;
+        case 1:
+        {
+            [(AppDelegate *)[UIApplication sharedApplication].delegate changeScene:WXSceneSession];
+
+            NSString *url = self.videoURL;
+            //            NSString *url = @"http://www.huxiu.com/article/140126/1.html?f=index_feed_article";
+            
+            //            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+            NSData *imageData = nil;
+            
+            if (!imageData) {
+                imageData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon-72" ofType:@"png"]];
+            }
+            NSString *webUrl = [USER_DEFAULT objectForKey:@"webUrl"];
+            
+            NSString *videoShareUrl = [NSString stringWithFormat:@"%@/v/%@",webUrl,self.vid];
+
+            UIImage *image = [UIImage imageWithData:imageData];
+            [(AppDelegate *)[UIApplication sharedApplication].delegate sendLinkContentTitle_video:@"视频分享" desc:@"视频分享" header:image URL:videoShareUrl uid:@"视频分享"];
+        }
+            break;
+        case 2:
+        {
+            NSString *url = self.videoURL;
+            //            NSString *url = @"http://www.huxiu.com/article/140126/1.html?f=index_feed_article";
+            
+            //            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+            NSData *imageData = nil;
+            
+            if (!imageData) {
+                imageData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon-72" ofType:@"png"]];
+            }
+            NSString *webUrl = [USER_DEFAULT objectForKey:@"webUrl"];
+
+            NSString *videoShareUrl = [NSString stringWithFormat:@"%@/v/%@",webUrl,self.vid];
+
+            [(AppDelegate *)[UIApplication sharedApplication].delegate sendMessageToQQIsQzone_video:NO decription:@"视频分享" title:@"视频分享" imageData:imageData targetUrl:videoShareUrl objectId:@""];
+        }
+            break;
+        case 3:
+        {
+            if (self.isCurrentUser) {
+                
+                [self deleteVideoWith];
+                
+            }else
+            {
+                [self fullscreenPressed:nil];
+
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showJuBaoViewController" object:nil];
+
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
+
+- (void)deleteVideoWith
+{
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+    NSString *uid = [[USER_DEFAULT valueForKey:MOKA_USER_VALUE] valueForKey:@"id"];
+    NSString *photoId = getSafeString(self.vid);
+    NSDictionary *dict = [AFParamFormat formatDeleteActionParams:photoId userId:uid];
+    [AFNetwork deletePicture:dict success:^(id data){
+        [MBProgressHUD hideHUDForView:self animated:YES];
+        
+        if ([data[@"status"] integerValue] == kRight) {
+            
+            [self fullscreenPressed:nil];
+        }
+        else{
+        }
+        
+        
+    }failed:^(NSError *error){
+        [MBProgressHUD hideHUDForView:self animated:YES];
+        
+    }];
+}
+
+- (void)addMaskViewWith:(UIImage *)maskImage
+{
+    self.maskImageView.hidden = NO;
+    self.maskImageView.image = maskImage;
+    self.maskImageView.contentMode = UIViewContentModeScaleToFill;
+}
+
+- (void)hideMaskView
+{
+    self.maskImageView.hidden = YES;
+
+    
+}
+
+
+
+@end
+
+
+# pragma mark - ALMoviePlayerControlsBar
+
+@implementation ALMoviePlayerControlsBar_sqc
+
+- (id)init {
+    if ( self = [super init] ) {
+        self.opaque = NO;
+    }
+    return self;
+}
+
+- (void)setColor:(UIColor *)color {
+    if (_color != color) {
+        _color = color;
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [_color CGColor]);
+    CGContextFillRect(context, rect);
+}
+
+@end
+

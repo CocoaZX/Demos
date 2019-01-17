@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>1</key>
+	<string>学生</string>
+	<key>2</key>
+	<string>平面模特</string>
+	<key>3</key>
+	<string>艺人</string>
+	<key>4</key>
+	<string>演员</string>
+	<key>5</key>
+	<string>歌手</string>
+	<key>6</key>
+	<string>舞蹈演员</string>
+	<key>7</key>
+	<string>白领</string>
+	<key>8</key>
+	<string>航空业</string>
+	<key>9</key>
+	<string>礼仪</string>
+	<key>10</key>
+	<string>自由职业</string>
+</dict>
+</plist>

@@ -1,0 +1,3 @@
+[submodule "lyricsFetcher"]
+	path = lyricsFetcher
+	url = https://github.com/liaogang/lyricsFetcher.git

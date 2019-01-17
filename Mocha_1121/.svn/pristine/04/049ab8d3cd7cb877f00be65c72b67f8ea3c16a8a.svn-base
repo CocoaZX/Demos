@@ -1,0 +1,13 @@
+//
+//  CustomUIButton.h
+//  WeiMi
+//
+//  Created by lvjianxiong on 14-9-4.
+//
+//
+
+#import <UIKit/UIKit.h>
+
+@interface CustomUIButton : UIButton
+
+@end

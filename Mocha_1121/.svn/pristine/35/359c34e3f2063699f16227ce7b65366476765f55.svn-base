@@ -1,0 +1,45 @@
+//
+//  URLHelper.m
+//  ouser
+//
+//  Created by Liu Pingchuan on 13-3-29.
+//  Copyright (c) 2013年 Totti.Lv. All rights reserved.
+//
+
+#import "URLHelper.h"
+
+@implementation URLHelper
+
++(NSString *)_encodeString : (NSString *)string{
+    NSString *result = (NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)string, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+    return [result autorelease];
+}
+
+
++ (NSString *)URLEncodedString:(NSString *)string
+{
+    CFStringRef stringRef = CFBridgingRetain(string);
+    CFStringRef encoded = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                  stringRef,
+                                                                  NULL,
+                                                                  CFSTR("!*'\"();:@&=+$,/?%#[]% "),
+                                                                  kCFStringEncodingUTF8);
+    CFRelease(stringRef);
+    return CFBridgingRelease(encoded);
+}
+
+/*
+ (":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`")
+ - (NSString*)encodeURL:(NSString *)string {
+ NSString *newString = NSMakeCollectable([(NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"), CFStringConvertNSStringEncodingToEncoding([self stringEncoding])) autorelease]);
+ if (newString) {
+ return newString;
+ }
+ return @"";
+ }
+ */
+
+
+
+
+@end

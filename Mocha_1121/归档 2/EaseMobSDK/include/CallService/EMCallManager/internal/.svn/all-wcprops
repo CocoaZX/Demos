@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/CallService/EMCallManager/internal
+END
+ICallManagerBase.h
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/CallService/EMCallManager/internal/ICallManagerBase.h
+END
+ICallManagerCall.h
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/CallService/EMCallManager/internal/ICallManagerCall.h
+END

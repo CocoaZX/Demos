@@ -1,0 +1,35 @@
+//
+//  SQCVideoNotificationBlock.h
+//  CJ_ijplayerTest
+//
+//  Created by 小猪猪 on 16/6/1.
+//  Copyright © 2016年 sdafsafsaf. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+
+typedef void (^VideoNotificationChange)(NSNotification *notification);
+
+@interface SQCVideoNotificationBlock : NSObject
+
+
+@property (copy, nonatomic) VideoNotificationChange loadStateDidChange;
+@property (copy, nonatomic) VideoNotificationChange moviePlayBackDidFinish;
+@property (copy, nonatomic) VideoNotificationChange moviePlayBackStateDidChange;
+@property (copy, nonatomic) VideoNotificationChange mediaIsPreparedToPlayDidChange;
+
+
+- (void)setTheloadStateDidChangeBlock:(VideoNotificationChange)block;
+- (void)setThemoviePlayBackDidFinishBlock:(VideoNotificationChange)block;
+- (void)setThemoviePlayBackStateDidChangeBlock:(VideoNotificationChange)block;
+- (void)setThemediaIsPreparedToPlayDidChangeBlock:(VideoNotificationChange)block;
+
+
+- (void)registNotificationWithPlayer:(id)player;
+
+- (void)cancelNotificationWithPlayer:(id)player;
+
+
+
+@end

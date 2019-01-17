@@ -1,0 +1,13 @@
+//
+//  NSDictionary+log.h
+//  Mocha
+//
+//  Created by zhoushuai on 16/1/23.
+//  Copyright © 2016年 renningning. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface NSDictionary (log)
+
+@end

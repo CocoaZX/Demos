@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/EaseMobClientSDK
+END
+EaseMob.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/EaseMobClientSDK/EaseMob.h
+END
+EMSDKFullHeaders.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/EaseMobClientSDK/EMSDKFullHeaders.h
+END
+EMSDKFull.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/EaseMobClientSDK/EMSDKFull.h
+END
+EaseMobHeaders.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/mokaios/!svn/ver/414/1/iOS/trunk/Mocha_1121/ThirdParty/EaseMobSDK/include/EaseMobClientSDK/EaseMobHeaders.h
+END

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AcutionPublisherCheckController">
+            <connections>
+                <outlet property="acutionInfoView" destination="Dhi-vS-wia" id="n61-KS-Uuw"/>
+                <outlet property="auctionNumTextField" destination="aAo-aE-inE" id="bIh-nL-Zbs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="OuN-IN-Qkm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RN-cu-poC">
+                    <rect key="frame" x="20" y="270" width="280" height="50"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.32941176470588235" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="msW-hy-ypd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="验证">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="yanzhengBtnClick:" destination="-1" eventType="touchUpInside" id="3if-Nc-KNz"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhi-vS-wia" customClass="AcutionInfoView">
+                    <rect key="frame" x="30" y="20" width="260" height="135"/>
+                    <color key="backgroundColor" red="0.78770650220000005" green="1" blue="0.37558378920000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="135" id="GpA-hB-O0q"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="49e-DS-3j5">
+                    <rect key="frame" x="30" y="180" width="260" height="50"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入对方提供的竞拍码完成交易" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aAo-aE-inE">
+                            <rect key="frame" x="10" y="0.0" width="240" height="50"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="vwj-Sp-DVO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="n90-nM-sVE"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="aAo-aE-inE" firstAttribute="top" secondItem="49e-DS-3j5" secondAttribute="top" id="GUG-h8-o8t"/>
+                        <constraint firstItem="aAo-aE-inE" firstAttribute="leading" secondItem="49e-DS-3j5" secondAttribute="leading" constant="10" id="Wru-Dg-73Q"/>
+                        <constraint firstAttribute="trailing" secondItem="aAo-aE-inE" secondAttribute="trailing" constant="10" id="Wty-sI-ZBw"/>
+                        <constraint firstAttribute="height" constant="50" id="d97-1n-8I6"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="1RN-cu-poC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="6i5-4G-u8D"/>
+                <constraint firstItem="49e-DS-3j5" firstAttribute="top" secondItem="Dhi-vS-wia" secondAttribute="bottom" constant="25" id="88N-2p-t4r"/>
+                <constraint firstAttribute="trailing" secondItem="Dhi-vS-wia" secondAttribute="trailing" constant="30" id="EKq-ru-ib2"/>
+                <constraint firstItem="Dhi-vS-wia" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="Sjr-6B-fQP"/>
+                <constraint firstItem="1RN-cu-poC" firstAttribute="top" secondItem="49e-DS-3j5" secondAttribute="bottom" constant="40" id="ZfR-EE-Vmo"/>
+                <constraint firstItem="Dhi-vS-wia" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="jYE-II-bgx"/>
+                <constraint firstItem="49e-DS-3j5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="me7-i9-C86"/>
+                <constraint firstAttribute="trailing" secondItem="1RN-cu-poC" secondAttribute="trailing" constant="20" id="w2b-Lp-Gzr"/>
+                <constraint firstAttribute="trailing" secondItem="49e-DS-3j5" secondAttribute="trailing" constant="30" id="w4T-qH-8Y0"/>
+            </constraints>
+            <point key="canvasLocation" x="84" y="163"/>
+        </view>
+    </objects>
+</document>

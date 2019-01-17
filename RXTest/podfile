@@ -1,0 +1,12 @@
+platform :ios, '8.0'  
+use_frameworks!  
+target 'RXTest' do   
+  pod 'RxSwift', '~> 3.3.1'
+  pod 'RxCocoa', '~> 3.3.1'
+  pod 'RxDataSources', '~> 1.0.3'
+  pod 'Alamofire', '~> 4.5.0'
+  pod 'SwiftyJSON', '~> 3.1.4'
+
+
+end
+

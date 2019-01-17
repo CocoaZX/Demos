@@ -1,0 +1,17 @@
+PODS:
+  - RxSwift (3.3.1)
+  - SQLite.swift (0.11.2):
+    - SQLite.swift/standard (= 0.11.2)
+  - SQLite.swift/standard (0.11.2)
+
+DEPENDENCIES:
+  - RxSwift (~> 3.3.1)
+  - SQLite.swift (~> 0.11.2)
+
+SPEC CHECKSUMS:
+  RxSwift: 8fc9f2de6275a9101d518444e00bf32f1a42caac
+  SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
+
+PODFILE CHECKSUM: 1b43541c8c2f5946fafc0edb8ee67c64059a2b68
+
+COCOAPODS: 1.2.0

@@ -24,7 +24,7 @@ void autoDictionarySetter(id self, SEL _cmd, id value);
     [super viewDidLoad];
 //    id genericTypedString = @"Some string";
     EOCSubClass *class = [[EOCSubClass alloc] init];
-    
+
     // Do any additional setup after loading the view, typically from a nib.
 }
 
